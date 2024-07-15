@@ -299,17 +299,17 @@ const App: React.FC = () => {
               <Grid item xs={12} sm={10}>
                 <Item>
                   <Grid container>
-                    <Grid item xs={2}>
+                    <Grid item xs={6}>
                       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                         <MobileDatePicker
-                          label="Data Início"
+                          label="Data"
                           value={selectedStartDate}
                           onChange={handleStartDateChange}
                           sx={{ width: '95%' }}
                         />
                       </LocalizationProvider>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={6}>
                       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                         <MobileTimePicker
                           label="Hora Início"
@@ -319,8 +319,8 @@ const App: React.FC = () => {
                         />
                       </LocalizationProvider>
                     </Grid>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={0}></Grid>
+                    <Grid item xs={6}>
                       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                         <MobileDatePicker
                           label="Data Final"
@@ -330,7 +330,7 @@ const App: React.FC = () => {
                         />
                       </LocalizationProvider>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={6}>
                       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                         <MobileTimePicker
                           label="Hora Início"
