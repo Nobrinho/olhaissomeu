@@ -6,7 +6,7 @@ import thumb from './assets/thumb.jpeg'
 import thumb2 from './assets/thumb2.jpeg'
 import thumb3 from './assets/thumb3.jpeg'
 import thumb4 from './assets/thumb4.jpeg'
-
+import capa from './assets/capa.jpeg'
 import olhaissmomeulogo2 from './assets/olhaissomeulogo2.svg'
 import '@fontsource/roboto/300.css'
 import Button from '@mui/material/Button'
@@ -29,6 +29,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TranslateIcon from '@mui/icons-material/Translate';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 
 const Theme = createTheme({
@@ -196,6 +198,7 @@ const App: React.FC = () => {
       <CssBaseline />
       <div className="App">
         <div className="main">
+          <div className='background'></div>
           <div className="topBar">
             <div>
               <div>
@@ -214,13 +217,14 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="slider">
-            <div className='background'>
+
+            <div>
               <div style={{
                 height: '30vh',
                 width: '100%',
                 padding: '0 5%',
               }}>
-                <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '8.5vh' }}>
+                <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '4vh' }}>
                   Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
                   <br />
                   <br />
@@ -237,21 +241,24 @@ const App: React.FC = () => {
                   </div>
                 </Typography>
               </div>
-
             </div>
-            <div >
-              <Grid container spacing={2} className='cardGroup'>
-                {reels.map((real) => (
-                  <Grid item xs={6} sm={3} style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}>
-                    <Card key={real.img} style={{ margin: '10px' }} className='card'>
-                      <img src={real.img} alt="reels" />
-                    </Card>
-                  </Grid>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              <ImageList sx={{width: '100vw', display: 'flex', justifyContent: 'center', padding: '0 5% 0 5%' }} cols={4}>
+                {reels.map((item: any) => (
+                  <ImageListItem key={item.img} sx={{ margin: '0 20px 0 20px'}}>
+                    <img
+                      style={{ cursor: 'pointer', borderRadius: '20px', height: '240px' }}
+                      srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                      src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
                 ))}
-              </Grid>
+              </ImageList>
             </div>
           </div>
           <div className="searchBar">
@@ -328,7 +335,7 @@ const App: React.FC = () => {
               </Grid>
             </Grid>
           </div>
-          <div className="gallery">
+          {/* <div className="gallery">
             <Grid container spacing={2}>
               {videos.map((video: Video) => (
                 <Grid item xs={12} sm={4} lg={2} key={video.id}>
@@ -369,11 +376,9 @@ const App: React.FC = () => {
                         }
                       }>
                         <IconButton aria-label="add to favorites" size='small'>
-                          {/*    <FavoriteIcon /> */}
                         </IconButton>
                         {<div>
                           <IconButton aria-label="share" size='small'>
-                            {/*    <ShareIcon /> */}
                           </IconButton>
                           <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                             <FileDownloadIcon />
@@ -385,8 +390,8 @@ const App: React.FC = () => {
                 </Grid>
               ))}
             </Grid>
-          </div>
-          <div className='footer'>
+          </div> */}
+          {/* <div className='footer'>
             <Grid container>
               <Grid item xs={12} sm={12} sx={{
                 display: 'flex',
@@ -401,7 +406,7 @@ const App: React.FC = () => {
                 </div>
               </Grid>
             </Grid>
-          </div>
+          </div> */}
         </div>
       </div>
     </ThemeProvider>

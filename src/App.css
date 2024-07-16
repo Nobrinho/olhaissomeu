@@ -8,13 +8,33 @@
 .main {
   display: flex;
   align-items: center;
-  height: 100vh;
   flex-direction: column;
+  height: 100vh;
+}
+.main, .topBar {
+  position: relative;
+  z-index: 1;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background-image: url('./assets/capa.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  clip-path: ellipse(100% 55% at 50% 40%);
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .topBar {
   width: 100%;
   padding: 0 5% 0 5%;
+  background-color: white;
 }
 
 .topBar>div {
@@ -61,29 +81,13 @@
   margin-bottom: 100px;
 }
 
-.background {
-  background-image: url('./assets/capa.jpeg');
-  background-size: cover;
-  background-position: top;
-  clip-path: ellipse(120% 60% at 50% 40%);
-}
-
-.cardGroup {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  height: 10vh;
-  width: 100%;
-  bottom: 0;
-}
-
 .card {
- height: 220px;
- width: 220px;
+  height: 11vh;
+  width: 15vw;
   border-radius: 20% !important;
 }
 
-.card > img {
+.card>img {
   background-position: center;
   background-size: cover;
   height: 100%;
