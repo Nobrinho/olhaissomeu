@@ -1,63 +1,57 @@
 
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import logo from './assets/logop.png'
+import logo from './assets/brand.svg'
+import thumb from './assets/thumb.jpeg'
+import thumb2 from './assets/thumb2.jpeg'
+import thumb3 from './assets/thumb3.jpeg'
+import thumb4 from './assets/thumb4.jpeg'
+
+import olhaissmomeulogo2 from './assets/olhaissomeulogo2.svg'
 import '@fontsource/roboto/300.css'
-import { useTheme } from '@mui/material/styles'
-import Box from '@mui/material/Box'
-import SwipeableViews from 'react-swipeable-views'
-import { autoPlay } from 'react-swipeable-views-utils'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Item from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
-/* import ShareIcon from '@mui/icons-material/Share' */
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
-/* import FavoriteIcon from '@mui/icons-material/Favorite' */
 import axios from 'axios'
 import { CardContent, Typography } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import banner from './assets/banner.png'
-import banner2 from './assets/banner2.png'
-import banner3 from './assets/banner3.png'
-import fbLogo from './assets/fb.svg'
-import instaLogo from './assets/insta.png'
-import MobileStepper from '@mui/material/MobileStepper'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import 'dayjs/locale/pt-br'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
 import SearchIcon from '@mui/icons-material/Search'
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TranslateIcon from '@mui/icons-material/Translate';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 
-const darkTheme = createTheme({
+const Theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
   },
 });
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const reels = [
+  {
+    img: thumb,
+  },
+  {
+    img: thumb2,
+  },
+  {
+    img: thumb3,
+  },
+  {
+    img: thumb4,
+  },
+]
 
-const images = [
-  {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath: banner,
-  },
-  {
-    label: 'Bird',
-    imgPath: banner2,
-  },
-  {
-    label: 'Bali, Indonesia',
-    imgPath: banner3,
-  },
-];
 
 type Video = {
   created_at: string;
@@ -98,9 +92,6 @@ const App: React.FC = () => {
   }
   const openLink = () => {
     window.open('https://www.instagram.com/olhaissomeu.brasil?igsh=MXd0cHhzeDZoMTAwMg==', '_blank')
-  }
-  const openFB = () => {
-    window.open('https://www.facebook.com/profile.php?id=100090064226997&mibextid=ZbWKwL', '_blank')
   }
   const token = '$10$gqUEvTBQY9zSFzjqjMSzi.Y6mmz2i94/vF/mFP3uZuUqYHR9Cia5i'
   const [videos, setVideos] = useState<Video[]>([])
@@ -143,7 +134,7 @@ const App: React.FC = () => {
       const date = new Date(dateString)
       const year = date.getFullYear()
       const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const day = (date.getDate()-1).toString().padStart(2, '0')
+      const day = (date.getDate() - 1).toString().padStart(2, '0')
       const time = new Date(isoTimeString)
       const hours = time.getUTCHours().toString().padStart(2, '0')
       const minutes = time.getUTCMinutes().toString().padStart(2, '0')
@@ -189,21 +180,7 @@ const App: React.FC = () => {
     }
   }
 
-  const theme = useTheme()
-  const [activeStep, setActiveStep] = React.useState(0)
-  const maxSteps = images.length
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  }
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  }
-
-  const handleStepChange = (step: number) => {
-    setActiveStep(step)
-  }
   const handleVideoClick = (videoElement: HTMLVideoElement) => {
     if (videoElement.requestFullscreen) {
       videoElement.requestFullscreen().then(() => {
@@ -215,85 +192,73 @@ const App: React.FC = () => {
   }
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={Theme}>
       <CssBaseline />
       <div className="App">
         <div className="main">
-          <Grid container className="topBar">
-            <Grid item>
-              <img width={95} src={logo} alt="logo" />
-            </Grid>
-            <div className="socials">
-              <Button variant='contained' style={{ backgroundColor: '#4272F7', color: 'white', width: '122px' }}>home</Button>
-              <Button style={{ marginRight: '20px' }}>informaçöes</Button>
-              <img src={fbLogo} alt="fb" min-width={20} width={30} onClick={openFB} />
-              <img src={instaLogo} alt="insta" min-width={20} width={30} onClick={openLink} />
+          <div className="topBar">
+            <div>
+              <div>
+                <img src={logo} alt="logo" height={50} />
+              </div>
+              <a href="/">Onde estamos</a>
+              <a href="/">Sobre nós</a>
+              <a href="/">Eventos</a>
+              <div onClick={openLink} style={{ display: 'flex', alignItems: 'center' }} className='button'>
+                <InstagramIcon sx={{ color: 'white', marginRight: '10px' }} />
+                <Typography variant="h6" color={'white'}>Conheça nosso instagram</Typography>
+              </div>
+              <div onClick={openLink} style={{ display: 'flex', alignItems: 'center' }} className='button'>
+                <TranslateIcon sx={{ color: 'white' }} />
+              </div>
             </div>
-          </Grid>
+          </div>
           <div className="slider">
-            <Box sx={{ width: '100%', flexGrow: 1, bgcolor: 'black' }}>
-              <AutoPlaySwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-              >
-                {images.map((step, index) => (
-                  <div key={step.label}>
-                    {Math.abs(activeStep - index) <= 2 ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          maxHeight: 450,
-                          display: 'block',
-                          width: '100%',
-                          overflow: 'hidden',
-                          backgroundSize: 'cover',
-
-                        }}
-                        src={step.imgPath}
-                      />
-                    ) : null}
+            <div className='background'>
+              <div style={{
+                height: '30vh',
+                width: '100%',
+                padding: '0 5%',
+              }}>
+                <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '8.5vh' }}>
+                  Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
+                  <br />
+                  <br />
+                  <p style={{
+                    width: '350px',
+                    textShadow: '0px 0px 10px rgba(0, 0, 0, 0.9)',
+                    fontSize: '1.2rem',
+                    fontWeight: 'normal',
+                  }}>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
+                  <br />
+                  <div onClick={openLink} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
+                    <PlayCircleOutlineIcon sx={{ color: 'white', marginRight: '20px' }} />
+                    <Typography variant="h6" fontWeight={'bold'} color={'white'}>Assistir meus videos</Typography>
                   </div>
+                </Typography>
+              </div>
+
+            </div>
+            <div >
+              <Grid container spacing={2} className='cardGroup'>
+                {reels.map((real) => (
+                  <Grid item xs={6} sm={3} style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}>
+                    <Card key={real.img} style={{ margin: '10px' }} className='card'>
+                      <img src={real.img} alt="reels" />
+                    </Card>
+                  </Grid>
                 ))}
-              </AutoPlaySwipeableViews>
-              {
-                <MobileStepper
-                  steps={maxSteps}
-                  position="static"
-                  activeStep={activeStep}
-                  nextButton={
-                    <Button
-                      size="large"
-                      onClick={handleNext}
-                      disabled={activeStep === maxSteps - 1}
-                    >
-
-                      {theme.direction === 'rtl' ? (
-                        <KeyboardArrowLeft />
-                      ) : (
-                        <KeyboardArrowRight />
-                      )}
-                    </Button>
-                  }
-                  backButton={
-                    <Button size="large" onClick={handleBack} disabled={activeStep === 0}>
-                      {theme.direction === 'rtl' ? (
-                        <KeyboardArrowRight />
-                      ) : (
-                        <KeyboardArrowLeft />
-                      )}
-
-                    </Button>
-                  }
-                />}
-            </Box>
+              </Grid>
+            </div>
           </div>
           <div className="searchBar">
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Item>
-                  <Typography variant="h3" sx={{ color: 'white', fontWeight: 'bold' }}>Vídeos das Quadras</Typography>
+                  <Typography variant="h3" sx={{ fontWeight: 'bold' }}>Vídeos das Quadras</Typography>
                 </Item>
               </Grid>
               <Grid item xs={12} sm={10}>
@@ -404,11 +369,11 @@ const App: React.FC = () => {
                         }
                       }>
                         <IconButton aria-label="add to favorites" size='small'>
-                       {/*    <FavoriteIcon /> */}
+                          {/*    <FavoriteIcon /> */}
                         </IconButton>
                         {<div>
                           <IconButton aria-label="share" size='small'>
-                         {/*    <ShareIcon /> */}
+                            {/*    <ShareIcon /> */}
                           </IconButton>
                           <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                             <FileDownloadIcon />
@@ -423,27 +388,17 @@ const App: React.FC = () => {
           </div>
           <div className='footer'>
             <Grid container>
-              <Grid item xs={12} sm={3}>
-                <Card sx={{
-                  width: '300px'
-                }}>
-                  <img src={logo} alt="" width={230} />
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} sx={{
-                textAlign: 'justify',
-                padding: '0px 20px 0px 20px',
-              }}>
-                <Typography variant="h6" sx={{ color: 'white' }}>Olha Isso Meu</Typography>
-                <Typography variant="h6" sx={{ color: 'white' }}>"consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia."</Typography>
-              </Grid>
-              <Grid item xs={12} sm={3} sx={{
+              <Grid item xs={12} sm={12} sx={{
                 display: 'flex',
                 justifyContent: 'center',
+                gap: '100px',
                 alignItems: 'center',
+                padding: '10px',
               }}>
-                <img src={fbLogo} alt="fb" min-width={20} width={60} onClick={openFB} />
-                <img src={instaLogo} alt="insta" min-width={20} width={60} onClick={openLink} />
+                <Typography variant="h6" sx={{ color: 'white' }}>© 2024 - Todos os direitos reservados - OlhaIssoMeu. Clique ao lado e saiba mais</Typography>
+                <div style={{ background: "white", padding: "5px 70px 0px 70px", borderRadius: "22px" }}>
+                  <img src={olhaissmomeulogo2} alt="olha-isso-meu-logo" height={40} />
+                </div>
               </Grid>
             </Grid>
           </div>
