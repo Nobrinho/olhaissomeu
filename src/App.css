@@ -8,6 +8,7 @@
 .main {
   display: flex;
   align-items: center;
+
   flex-direction: column;
   height: 100vh;
 }
@@ -122,3 +123,13 @@
   height: 141px;
   background: #000000C9;
 }
+
+
+
+@media (min-width: 1920px) {
+  .image-item img {
+    height: 240px;
+    width: 240px;
+  }
+}
+

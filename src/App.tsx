@@ -53,6 +53,7 @@ const reels = [
     img: thumb4,
   },
 ]
+const maxWidth = window.innerWidth <= 600 ? '80vw' : '15vw';
 
 
 type Video = {
@@ -245,17 +246,52 @@ const App: React.FC = () => {
             <div style={{
               display: 'flex',
               justifyContent: 'center',
+              flexWrap: 'wrap',
             }}>
-              <ImageList sx={{width: '100vw', display: 'flex', justifyContent: 'center', padding: '0 5% 0 5%' }} cols={4}>
+              <ImageList sx={{
+                width: '100vw',
+                display: 'flex',
+                justifyContent: 'center',
+                // Adiciona uma media query para ajustar o layout em telas menores
+                '@media (max-width:600px)': {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }
+              }}>
                 {reels.map((item: any) => (
-                  <ImageListItem key={item.img} sx={{ margin: '0 20px 0 20px'}}>
-                    <img
-                      style={{ cursor: 'pointer', borderRadius: '20px', height: '240px' }}
-                      srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                      src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                      alt={item.title}
-                      loading="lazy"
-                    />
+                  <ImageListItem key={item.img} className="image-item" sx={{
+                    margin: '0 10px 0 10px',
+                    '@media (max-width:600px)': {
+                      cols: 2,
+                    },
+                    '@media (min-width:601px)': {
+                      cols: 6,
+                    }
+                  }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                      <img
+                        style={{
+                          cursor: 'pointer',
+                          borderRadius: '20px',
+                          height: 'auto',
+                          width: '100%',
+                          maxWidth: maxWidth, // Use the dynamic maxWidth based on the viewport width
+                        }}
+                        srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                        src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                        alt={item.title}
+                        loading="lazy"
+                      />
+                      <PlayCircleOutlineIcon style={{
+                        position: 'absolute',
+                        top: '45%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)', // Centraliza o ícone
+                        // Ajuste o tamanho do ícone conforme necessário
+                        fontSize: '48px', // Exemplo de ajuste de tamanho
+                        color: 'white',
+                      }} />
+                    </div>
                   </ImageListItem>
                 ))}
               </ImageList>
