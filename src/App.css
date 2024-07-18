@@ -22,7 +22,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 800px;
+  height: 600px;
   background-image: url('./assets/capa.jpeg');
   background-size: cover;
   background-position: center;
@@ -50,18 +50,6 @@
   align-items: center;
   width: auto;
   gap: 20px;
-}
-
-@media (max-width: 970px) {
-  .desktopMenu {
-    display: none;
-  }
-}
-
-@media (min-width: 970px) {
-  .hamburguer {
-    display: none;
-  }
 }
 
 .desktopMenu>a {
@@ -94,6 +82,7 @@
   width: 80px;
 }
 
+
 .slider {
   width: 100vw;
   position: relative;
@@ -118,7 +107,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  padding: 10px;
+  padding: 5% 10% 0 10%;
+  background-color: #ffffff;
 }
 
 .gallery {
@@ -126,13 +116,20 @@
   width: 100vw;
   justify-content: center;
   padding: 20px;
+  background-color: #ffffff;
 }
 
-.stepperBox {
+.avatarContainer {
   display: flex;
-  justify-content: center;
-  width: 100vw;
-  height: 10%;
+  justify-content: start;
+  align-items: center;
+  background:  #00000020;
+  padding: 5px;
+  border-radius: 30px;
+}
+
+.avatarContainer> p {
+  margin: 0 5px 0 5px 
 }
 
 .footer {
@@ -150,6 +147,18 @@
   .image-item img {
     height: 240px;
     width: 240px;
+  }
+}
+
+@media (max-width: 970px) {
+  .desktopMenu {
+    display: none;
+  }
+}
+
+@media (min-width: 970px) {
+  .hamburguer {
+    display: none;
   }
 }
 

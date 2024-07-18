@@ -16,12 +16,14 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import Avatar from '@mui/material/Avatar';
+import ShareIcon from '@mui/icons-material/Share';
 
 
 const reels = [
- /*  {
-    img: thumb,
-  }, */
+  /*  {
+     img: thumb,
+   }, */
   /* 
  {
    img: thumb2,
@@ -69,9 +71,6 @@ const Galery = () => {
   }
   const handleStartTimeChange = (newValue: any) => {
     setSelectedStartTime(newValue)
-  }
-  const handleEndDateChange = (newValue: any) => {
-    setSelectedEndDate(newValue)
   }
   const handleEndTimeChange = (newValue: any) => {
     setSelectedEndTime(newValue)
@@ -173,7 +172,7 @@ const Galery = () => {
 
 
   return (
-    <div>
+    <div className=''>
       <div className="slider">
         <div>
           <div style={{
@@ -257,72 +256,54 @@ const Galery = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Item>
-              <Typography variant="h3" sx={{ fontWeight: 'bold' }}>Vídeos das Quadras</Typography>
+              <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Acesse seus vídeos com filtros personalizados</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '0.99rem' }}>Registre e compartilhe momentos inesquecíves com os seus amigos e redes sociais. Não esqueça das <span style={{ fontWeight: '1000' }}> HASHTAGS!</span></Typography>
             </Item>
           </Grid>
-          <Grid item xs={12} sm={10}>
+          <Grid item xs={12}>
             <Item>
-              <Grid container>
-                <Grid item xs={6}>
+              <Grid container spacing={2} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid item xs={4} sm={3}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                     <MobileDatePicker
                       label="Data"
                       value={selectedStartDate}
                       onChange={handleStartDateChange}
-                      sx={{ width: '95%' }}
+
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4} sm={3}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                     <MobileTimePicker
                       label="Hora Início"
                       value={selectedStartTime}
                       onChange={handleStartTimeChange}
-                      sx={{ width: '95%' }}
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={0}></Grid>
-                <Grid item xs={6}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-                    <MobileDatePicker
-                      label="Data Final"
-                      value={selectedEndDate}
-                      onChange={handleEndDateChange}
-                      sx={{ width: '95%' }}
-                    />
-                  </LocalizationProvider>
-                </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4} sm={3}>
                   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
                     <MobileTimePicker
-                      label="Hora Início"
+                      label="Hora final"
                       value={selectedEndTime}
                       onChange={handleEndTimeChange}
-                      sx={{ width: '95%' }}
                     />
                   </LocalizationProvider>
                 </Grid>
+                <Grid item xs={12} sm={3}>
+                  <Item>
+                    <Button
+                      sx={{ borderRadius: '20px' }}
+                      fullWidth
+                      className='button'
+                      startIcon={<SearchIcon />}
+                      variant="contained"
+                      onClick={() => fetchVideoBySpot(13, 1, 20, selectedStartDate, selectedStartTime, selectedEndDate, selectedEndTime)}
+                    > Buscar</Button>
+                  </Item>
+                </Grid>
               </Grid>
-            </Item>
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <Item
-              sx={
-                {
-                  display: 'flex',
-                  justifyContent: 'end',
-                  height: '100%',
-                  alignItems: 'center',
-                }
-              }>
-              <Button
-                sx={{ color: 'white', backgroundColor: '#4272F7' }}
-                startIcon={<SearchIcon />}
-                variant="contained"
-                onClick={() => fetchVideoBySpot(13, 1, 20, selectedStartDate, selectedStartTime, selectedEndDate, selectedEndTime)}
-              > Buscar</Button>
             </Item>
           </Grid>
         </Grid>
@@ -335,6 +316,7 @@ const Galery = () => {
                 <Card
                   sx={{
                     minHeight: '300px',
+                    borderRadius: '25px',
                   }}
                 >
                   <video
@@ -348,13 +330,16 @@ const Galery = () => {
                   </video>
                   <CardContent sx={{
                     padding: '0 16px 0 16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
                   }}>
-                    <Typography gutterBottom variant="h6" component="div">
-                      Quadra {video.spot_id}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{
+                    <Typography variant="body2" color="primary" sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
+                      fontWeight: 'bold',
+                      fontSize: '1rem',
+                      marginBottom: '30px',
                     }}>
                       <span>{video.created_at}</span>
                       <span> {video.time}</span>
@@ -367,13 +352,16 @@ const Galery = () => {
                       padding: '0 16px 10px 16px',
                     }
                   }>
-                    <IconButton aria-label="add to favorites" size='small'>
-                    </IconButton>
+                    <div className='avatarContainer'>
+                      <Avatar sx={{ width: 30, height: 30 }}> <p style={{ fontSize: '15px' }}>BT</p> </Avatar>
+                      <p>Arena BT</p>
+                    </div>
                     {<div>
                       <IconButton aria-label="share" size='small'>
+                        <ShareIcon color='primary' />
                       </IconButton>
                       <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
-                        <FileDownloadIcon />
+                        <FileDownloadIcon color='primary' />
                       </IconButton>
                     </div>}
                   </CardActions>
