@@ -22,7 +22,7 @@ const App: React.FC = () => {
       <CssBaseline />
       <div className="App">
         <div className="main">
-          <div className='background'></div>
+          <div className='background' />
           <TopBar />
           <Galery />
           <Footer />

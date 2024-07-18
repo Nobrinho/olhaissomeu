@@ -21,8 +21,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 50vh;
+  width: 100vw;
+  height: 800px;
   background-image: url('./assets/capa.jpeg');
   background-size: cover;
   background-position: center;
@@ -33,8 +33,8 @@
 }
 
 .topBar {
-  width: 100%;
-  padding: 0 5% 0 5%;
+  width: 100vw;
+  padding: 10px 5% 1px 5%;
   background-color: white;
 }
 
@@ -42,11 +42,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 82px;
+  min-height: 82px;
+}
+.desktopMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
   gap: 20px;
 }
 
-.topBar>div>a {
+@media (max-width: 970px) {
+  .desktopMenu {
+    display: none;
+  }
+}
+
+@media (min-width: 970px) {
+  .hamburguer {
+    display: none;
+  }
+}
+
+.desktopMenu>a {
   color: black;
   text-decoration: none;
   font-weight: bold;
@@ -69,6 +87,7 @@
   color: black;
   font-weight: bold;
   cursor: pointer;
+  border: none;
 }
 
 .logo {
@@ -76,7 +95,7 @@
 }
 
 .slider {
-  width: 100%;
+  width: 100vw;
   position: relative;
   padding-bottom: 20px;
   margin-bottom: 100px;
@@ -98,13 +117,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   padding: 10px;
 }
 
 .gallery {
   display: flex;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   padding: 20px;
 }
@@ -112,16 +131,17 @@
 .stepperBox {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   height: 10%;
 }
 
 .footer {
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 141px;
+  width: 100vw;
+  height: min-141px;
   background: #000000C9;
+  padding: 20px 0 0 0 ;
 }
 
 

@@ -19,19 +19,20 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 
 
 const reels = [
-  /* {
+ /*  {
     img: thumb,
-  },
-  {
-    img: thumb2,
-  },
-  {
-    img: thumb3,
-  },
-  {
-    img: thumb4,
   }, */
-]
+  /* 
+ {
+   img: thumb2,
+ },
+ {
+   img: thumb3,
+ },
+ {
+   img: thumb4,
+ }, */
+] as any
 const maxWidth = window.innerWidth <= 600 ? '80vw' : '15vw';
 const openLink = () => {
   window.open('https://www.instagram.com/olhaissomeu.brasil?igsh=MXd0cHhzeDZoMTAwMg==', '_blank')
