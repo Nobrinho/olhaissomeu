@@ -178,7 +178,7 @@ const Galery = () => {
           <div style={{
             height: '30vh',
             width: '100%',
-            padding: '0 5%',
+            padding: '0 10%',
           }}>
             <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '4vh' }}>
               Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
@@ -309,14 +309,14 @@ const Galery = () => {
         </Grid>
       </div>
       <div className="gallery">
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {videos.map((video: Video) => (
-            <Grid item xs={12} sm={4} lg={2} key={video.id}>
+            <Grid item xs={12} sm={6} lg={3} key={video.id}>
               <Item>
                 <Card
                   sx={{
                     minHeight: '300px',
-                    borderRadius: '25px',
+                    borderRadius: '20px',
                   }}
                 >
                   <video

@@ -8,13 +8,19 @@
 .main {
   display: flex;
   align-items: center;
-
   flex-direction: column;
   height: 100vh;
 }
 .main, .topBar {
   position: relative;
   z-index: 1;
+}
+.zapButton {
+  position: fixed;
+  bottom: 12vh;
+  right: 5px;
+  z-index: 2;
+  height: 5vh;
 }
 
 .background {
@@ -34,7 +40,7 @@
 
 .topBar {
   width: 100vw;
-  padding: 10px 5% 1px 5%;
+  padding: 10px 10% 1px 10%;
   background-color: white;
 }
 
@@ -114,8 +120,8 @@
 .gallery {
   display: flex;
   width: 100vw;
+  padding: 5% 10% 5% 10%;
   justify-content: center;
-  padding: 20px;
   background-color: #ffffff;
 }
 

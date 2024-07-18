@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import TopBar from './layout/topbar/index'
 import Footer from './layout/footer/index'
 import Galery from './layout/content/galery/index'
+import zapIcon from './assets/zap-icon.svg'
 
 
 const Theme = createTheme({
@@ -26,8 +27,10 @@ const App: React.FC = () => {
           <TopBar />
           <Galery />
           <Footer />
+          <img src={zapIcon} alt="zapicon" className='zapButton' />
         </div>
       </div>
+
     </ThemeProvider>
   )
 }
