@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from '@mui/material/Grid'
 import { Typography } from '@mui/material'
-import olhaissmomeulogo2 from 'src/assets/olhaissomeulogo2.svg'
+import olhaissmomeulogo2 from '../../assets/olhaissomeulogo2.svg'
 
 const Footer = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from 'src/assets/brand.svg'
+import logo from '../../assets/brand.svg'
 import { Typography } from '@mui/material'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TranslateIcon from '@mui/icons-material/Translate'
