@@ -183,8 +183,6 @@ const Galery = () => {
       .then(() => console.log('Compartilhamento bem-sucedido!'))
       .catch((error) => console.log('Erro ao compartilhar:', error));
     } else {
-      // Caso a Web Share API não esteja disponível, você pode redirecionar diretamente para o WhatsApp
-      // ou mostrar uma mensagem informando que o compartilhamento não é suportado.
       window.open(`https://api.whatsapp.com/send?text=Confira este conteúdo incrível! /play/${videoUrl}`, '_blank');
     }
   };
