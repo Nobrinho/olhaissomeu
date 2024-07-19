@@ -163,6 +163,7 @@ const Galery = () => {
   }
 
   const handleVideoClick = (videoElement: HTMLVideoElement) => {
+    console.log('Video clicked:', videoElement);
     if (videoElement.requestFullscreen) {
       videoElement.requestFullscreen().then(() => {
         videoElement.play()
@@ -172,17 +173,19 @@ const Galery = () => {
     }
   }
 
-  const shareInfo = (url: string) => {
+  const shareInfo = (videoUrl: string) => {
     if (navigator.share) {
       navigator.share({
-        title: 'Compartilhe com seus amigos!',
-        text: 'Olha isso meu!',
-        url: url,
+        title: 'Compartilhe nas redes sociais',
+        text: 'OLHA ISSO MEU!',
+        url: `/play/${videoUrl}`
       })
       .then(() => console.log('Compartilhamento bem-sucedido!'))
       .catch((error) => console.log('Erro ao compartilhar:', error));
     } else {
-      window.open(`https://api.whatsapp.com/send?text=Confira este conteúdo incrível! ${url}`, '_blank');
+      // Caso a Web Share API não esteja disponível, você pode redirecionar diretamente para o WhatsApp
+      // ou mostrar uma mensagem informando que o compartilhamento não é suportado.
+      window.open(`https://api.whatsapp.com/send?text=Confira este conteúdo incrível! /play/${videoUrl}`, '_blank');
     }
   };
 
@@ -374,7 +377,7 @@ const Galery = () => {
                     </div>
                     {<div>
                       <IconButton aria-label="share" size='small'>
-                        <ShareIcon color='primary' onClick={() => {shareInfo(video.url)}} />
+                        <ShareIcon color='primary' onClick={() => {shareInfo(video.filename.split('.')[0])}} />
                       </IconButton>
                       <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                         <FileDownloadIcon color='primary' />
