@@ -13,6 +13,7 @@ import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import 'dayjs/locale/pt-br'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
@@ -24,7 +25,7 @@ const reels = [
   /*  {
      img: thumb,
    }, */
-  /* 
+  /*
  {
    img: thumb2,
  },
@@ -64,7 +65,6 @@ const Galery = () => {
   const [videos, setVideos] = useState<Video[]>([])
   const [selectedStartDate, setSelectedStartDate] = useState(null as any)
   const [selectedStartTime, setSelectedStartTime] = useState(null as any)
-  const [selectedEndDate, setSelectedEndDate] = useState(null as any)
   const [selectedEndTime, setSelectedEndTime] = useState(null as any)
   const handleStartDateChange = (newValue: any) => {
     setSelectedStartDate(newValue)
@@ -109,20 +109,22 @@ const Galery = () => {
     fetchData()
   }, [token])
 
-  async function fetchVideoBySpot(spot_id: number, page: number, per_page: number, start_date: string, start_time: string, end_date: string, end_time: string): Promise<any> {
+  async function fetchVideoBySpot(spot_id: number, page: number, per_page: number, start_date: string, start_time: string, end_time: string): Promise<any> {
     const convertDateAndTimeToYYYYMMDDHHMMSS = (dateString: string, isoTimeString: string) => {
       const date = new Date(dateString)
       const year = date.getFullYear()
       const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const day = (date.getDate() - 1).toString().padStart(2, '0')
+      const day = date.getDate().toString().padStart(2, '0') // Corrigido aqui
       const time = new Date(isoTimeString)
-      const hours = time.getUTCHours().toString().padStart(2, '0')
-      const minutes = time.getUTCMinutes().toString().padStart(2, '0')
+      const hours = time.getHours().toString().padStart(2, '0') // Mudança potencial aqui para getHours() se você quiser a hora local
+      const minutes = time.getMinutes().toString().padStart(2, '0') // Mudança potencial aqui para getMinutes() se você quiser os minutos locais
       const seconds = '00'
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
     }
     const correctedStartDate = encodeURIComponent(convertDateAndTimeToYYYYMMDDHHMMSS(start_date, start_time))
-    const correctedEndDate = encodeURIComponent(convertDateAndTimeToYYYYMMDDHHMMSS(end_date, end_time))
+    const correctedEndDate = encodeURIComponent(convertDateAndTimeToYYYYMMDDHHMMSS(start_date, end_time))
+
+    console.log(correctedStartDate, correctedEndDate);
     const baseUrl = 'https://olhaissomeu.com.br/api/videobyspot'
     const url = `${baseUrl}?spot_id=${spot_id}&page=${page}&per_page=${per_page}&start_date=${correctedStartDate}&end_date=${correctedEndDate}`
 
@@ -299,7 +301,7 @@ const Galery = () => {
                       className='button'
                       startIcon={<SearchIcon />}
                       variant="contained"
-                      onClick={() => fetchVideoBySpot(13, 1, 20, selectedStartDate, selectedStartTime, selectedEndDate, selectedEndTime)}
+                      onClick={() => fetchVideoBySpot(13, 1, 20, selectedStartDate, selectedStartTime, selectedEndTime)}
                     > Buscar</Button>
                   </Item>
                 </Grid>
