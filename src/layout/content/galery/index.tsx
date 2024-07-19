@@ -172,6 +172,20 @@ const Galery = () => {
     }
   }
 
+  const shareInfo = (url: string) => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Compartilhe com seus amigos!',
+        text: 'Olha isso meu!',
+        url: url,
+      })
+      .then(() => console.log('Compartilhamento bem-sucedido!'))
+      .catch((error) => console.log('Erro ao compartilhar:', error));
+    } else {
+      window.open(`https://api.whatsapp.com/send?text=Confira este conteúdo incrível! ${url}`, '_blank');
+    }
+  };
+
 
   return (
     <div className=''>
@@ -360,7 +374,7 @@ const Galery = () => {
                     </div>
                     {<div>
                       <IconButton aria-label="share" size='small'>
-                        <ShareIcon color='primary' />
+                        <ShareIcon color='primary' onClick={() => {shareInfo(video.url)}} />
                       </IconButton>
                       <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                         <FileDownloadIcon color='primary' />
