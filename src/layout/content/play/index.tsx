@@ -8,6 +8,8 @@ interface RouteParams {
 
 const Play: React.FC = () => {
   const { filename } = useParams<RouteParams>();
+  console.log(filename);
+  
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

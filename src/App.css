@@ -11,10 +11,12 @@
   flex-direction: column;
   height: 100vh;
 }
+
 .main, .topBar {
   position: relative;
   z-index: 1;
 }
+
 .zapButton {
   position: fixed;
   bottom: 12vh;
@@ -28,7 +30,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 900px;
+  height: 1200px;
   background-image: url('./assets/capaHD.jpeg');
   background-size: cover;
   background-position: bottom;
@@ -50,6 +52,7 @@
   align-items: center;
   min-height: 82px;
 }
+
 .desktopMenu {
   display: flex;
   justify-content: space-between;
@@ -87,13 +90,56 @@
 .logo {
   width: 80px;
 }
+
 .slider {
   width: 100vw;
   position: relative;
   padding-bottom: 20px;
-  margin-bottom: 100px;
-  margin-bottom: 40vh;
 }
+
+.header-text {
+  height: 900px;
+  width: 100vw;
+  padding: 0 10%;
+}
+
+.box-reel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+  padding: 0 10% 0 10%;
+  gap: 20px;
+}
+
+.reel-container {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.reel-container:hover {
+  cursor: pointer;
+  transform: scale(1.08);
+}
+.reel-container:hover .icon {
+  color: red;
+}
+
+.reel {
+  width: 400px;
+  border-radius: 20px;
+  display: block;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 100px !important;
+}
+
 
 .card {
   height: 11vh;
@@ -112,29 +158,32 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  padding: 5% 10% 0 10%;
+  padding: 1% 10% 0 10%;
   background-color: #ffffff;
 }
 
 .gallery {
   display: flex;
   width: 100vw;
-  padding: 5% 10% 5% 10%;
+  padding: 1% 10% 5% 10%;
   justify-content: center;
   background-color: #ffffff;
+}
+.customTimePicker .MuiOutlinedInput-notchedOutline {
+  border-radius: 20px !important;
 }
 
 .avatarContainer {
   display: flex;
   justify-content: start;
   align-items: center;
-  background:  #00000020;
+  background: #00000020;
   padding: 5px;
   border-radius: 30px;
 }
 
-.avatarContainer> p {
-  margin: 0 5px 0 5px 
+.avatarContainer>p {
+  margin: 0 5px 0 5px
 }
 
 .footer {
@@ -143,7 +192,7 @@
   width: 100vw;
   height: min-141px;
   background: #000000C9;
-  padding: 20px 0 0 0 ;
+  padding: 20px 0 0 0;
 }
 
 
@@ -166,4 +215,3 @@
     display: none;
   }
 }
-

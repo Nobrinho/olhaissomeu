@@ -74,7 +74,7 @@ const TopBar = () => {
               <MenuItem onClick={handleClose}><FmdGoodIcon/> Onde Estamos</MenuItem>
               <MenuItem onClick={handleClose}><CelebrationIcon/> Eventos</MenuItem>
               <MenuItem onClick={handleClose}><InfoIcon/> Sobre</MenuItem>
-              <MenuItem onClick={handleClose}><InstagramIcon/>Instagram</MenuItem>
+              <MenuItem onClick={openLink}><InstagramIcon/>Instagram</MenuItem>
             </Menu>
           </div>
         </div>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CardContent, Typography } from '@mui/material'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Item from '@mui/material/Grid'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -19,27 +17,26 @@ import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 import Avatar from '@mui/material/Avatar';
 import ShareIcon from '@mui/icons-material/Share';
+import thumb from '../../../assets/thumb.jpeg'
+import thumb2 from '../../../assets/thumb2.jpeg'
+import thumb3 from '../../../assets/thumb3.jpeg'
+import thumb4 from '../../../assets/thumb5.jpeg'
 
 
 const reels = [
-  /*  {
-     img: thumb,
-   }, */
-  /*
- {
-   img: thumb2,
- },
- {
-   img: thumb3,
- },
- {
-   img: thumb4,
- }, */
+  {
+    img: thumb,
+  },
+  {
+    img: thumb2,
+  },
+  {
+    img: thumb3,
+  },
+  {
+    img: thumb4,
+  },
 ] as any
-const maxWidth = window.innerWidth <= 600 ? '80vw' : '15vw';
-const openLink = () => {
-  window.open('https://www.instagram.com/olhaissomeu.brasil?igsh=MXd0cHhzeDZoMTAwMg==', '_blank')
-}
 type Video = {
   created_at: string;
   filename: string;
@@ -180,24 +177,26 @@ const Galery = () => {
         text: 'OLHA ISSO MEU!',
         url: `/play/${videoUrl}`
       })
-      .then(() => console.log('Compartilhamento bem-sucedido!'))
-      .catch((error) => console.log('Erro ao compartilhar:', error));
+        .then(() => console.log('Compartilhamento bem-sucedido!'))
+        .catch((error) => console.log('Erro ao compartilhar:', error));
     } else {
       window.open(`https://api.whatsapp.com/send?text=Confira este conteúdo incrível! /play/${videoUrl}`, '_blank');
+    }
+  };
+  const scrollToTarget = () => {
+    const target = document.getElementById('galleryTarget');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
 
   return (
-    <div className=''>
+    <div className='box-galery'>
       <div className="slider">
         <div>
-          <div style={{
-            height: '30vh',
-            width: '100%',
-            padding: '0 10%',
-          }}>
-            <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '4vh' }}>
+          <div className='header-text'>
+            <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '15vh' }}>
               Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
               <br />
               <br />
@@ -208,68 +207,27 @@ const Galery = () => {
                 fontWeight: 'normal',
               }}>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
               <br />
-              <button onClick={openLink} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
+              <button onClick={() => { scrollToTarget()}} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
                 <PlayCircleOutlineIcon sx={{ color: 'white', marginRight: '20px' }} />
                 <Typography variant="h6" fontWeight={'bold'} color={'white'}>Assistir meus videos</Typography>
               </button>
             </Typography>
           </div>
         </div>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}>
-          <ImageList sx={{
-            width: '100vw',
-            display: 'flex',
-            justifyContent: 'center',
-            // Adiciona uma media query para ajustar o layout em telas menores
-            '@media (max-width:600px)': {
-              flexDirection: 'column',
-              alignItems: 'center',
-            }
-          }}>
-            {reels.map((item: any) => (
-              <ImageListItem key={item.img} className="image-item" sx={{
-                margin: '0 10px 0 10px',
-                '@media (max-width:600px)': {
-                  cols: 2,
-                },
-                '@media (min-width:601px)': {
-                  cols: 6,
-                }
-              }}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <img
-                    style={{
-                      cursor: 'pointer',
-                      borderRadius: '20px',
-                      height: 'auto',
-                      width: '100%',
-                      maxWidth: maxWidth, // Use the dynamic maxWidth based on the viewport width
-                    }}
-                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                  <PlayCircleOutlineIcon style={{
-                    position: 'absolute',
-                    top: '45%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)', // Centraliza o ícone
-                    // Ajuste o tamanho do ícone conforme necessário
-                    fontSize: '48px', // Exemplo de ajuste de tamanho
-                    color: 'white',
-                  }} />
-                </div>
-              </ImageListItem>
-            ))}
-          </ImageList>
+        <div className='box-reel'>
+          {reels.map((item: any) => (
+            <div key={item.img} className='reel-container'>
+              <img
+                src={item.img}
+                alt={item.img}
+                className='reel'
+              />
+              <PlayCircleOutlineIcon className='icon' />
+            </div>
+          ))}
         </div>
       </div>
-      <div className="searchBar">
+      <div className="searchBar" id="galleryTarget">
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Item>
@@ -286,7 +244,7 @@ const Galery = () => {
                       label="Data"
                       value={selectedStartDate}
                       onChange={handleStartDateChange}
-
+                      sx={{ width: '100%', borderRadius: '20px', '& .MuiOutlinedInput-notchedOutline': { borderRadius: '20px' } }}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -296,6 +254,7 @@ const Galery = () => {
                       label="Hora Início"
                       value={selectedStartTime}
                       onChange={handleStartTimeChange}
+                      sx={{ width: '100%', borderRadius: '20px', '& .MuiOutlinedInput-notchedOutline': { borderRadius: '20px' } }}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -305,6 +264,7 @@ const Galery = () => {
                       label="Hora final"
                       value={selectedEndTime}
                       onChange={handleEndTimeChange}
+                      sx={{ width: '100%', borderRadius: '20px', '& .MuiOutlinedInput-notchedOutline': { borderRadius: '20px' } }}
                     />
                   </LocalizationProvider>
                 </Grid>
@@ -316,7 +276,7 @@ const Galery = () => {
                       className='button'
                       startIcon={<SearchIcon />}
                       variant="contained"
-                      onClick={() => fetchVideoBySpot(13, 1, 20, selectedStartDate, selectedStartTime, selectedEndTime)}
+                      onClick={() => fetchVideoBySpot(13, 1, 12, selectedStartDate, selectedStartTime, selectedEndTime)}
                     > Buscar</Button>
                   </Item>
                 </Grid>
@@ -325,8 +285,8 @@ const Galery = () => {
           </Grid>
         </Grid>
       </div>
-      <div className="gallery">
-        <Grid container spacing={3}>
+      <div className="gallery" >
+        <Grid container spacing={2}>
           {videos.map((video: Video) => (
             <Grid item xs={12} sm={6} lg={3} key={video.id}>
               <Item>
@@ -375,7 +335,7 @@ const Galery = () => {
                     </div>
                     {<div>
                       <IconButton aria-label="share" size='small'>
-                        <ShareIcon color='primary' onClick={() => {shareInfo(video.filename.split('.')[0])}} />
+                        <ShareIcon color='primary' onClick={() => { shareInfo(video.filename.split('.')[0]) }} />
                       </IconButton>
                       <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                         <FileDownloadIcon color='primary' />
