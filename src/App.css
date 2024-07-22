@@ -126,7 +126,7 @@
 }
 
 .reel {
-  width: 400px;
+  width: 350px;
   border-radius: 20px;
   display: block;
 }
@@ -195,23 +195,77 @@
   padding: 20px 0 0 0;
 }
 
-
-
-@media (min-width: 1920px) {
-  .image-item img {
-    height: 240px;
-    width: 240px;
-  }
-}
-
 @media (max-width: 1100px) {
   .desktopMenu {
     display: none;
+  }
+
+  .reel {
+    width: 180px;
+    border-radius: 20px;
+    display: block;
+  }
+
+  .box-reel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100vw;
+    padding: 0 2% 0 2%;
+    gap: 20px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 80px !important;
   }
 }
 
 @media (min-width: 1100px) {
   .hamburguer {
     display: none;
+  }
+
+  .header-text {
+    height: 580px;
+    width: 100vw;
+    padding: 0 10%;
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 800px;
+    background-image: url('./assets/capaHD.jpeg');
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed;
+    clip-path: ellipse(100% 52% at 50% 45%);
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+}
+
+@media (min-width: 3000px) {
+  .header-text {
+    height: 900px; /* Ajuste conforme necessário */
+    width: 100vw;
+    padding: 0 15%; /* Ajuste conforme necessário */
+  }
+
+  .background {
+    height: 1150px; /* Ajuste conforme necessário */
+    clip-path: ellipse(100% 60% at 50% 40%); /* Ajuste conforme necessário */
+  }
+
+  .box-reel {
+    padding: 0 5%; /* Ajuste conforme necessário */
+    gap: 30px; /* Ajuste conforme necessário */
   }
 }
