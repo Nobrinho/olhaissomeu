@@ -38,9 +38,7 @@ const App: React.FC = () => {
           <Route path="/play/:filename" element={<Play />} />
         </Routes>
       </Router>
-
       <CssBaseline />
-
     </ThemeProvider>
   )
 }
