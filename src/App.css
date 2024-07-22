@@ -168,6 +168,7 @@
   padding: 1% 10% 5% 10%;
   justify-content: center;
   background-color: #ffffff;
+  flex-direction: column;
 }
 .customTimePicker .MuiOutlinedInput-notchedOutline {
   border-radius: 20px !important;
@@ -222,6 +223,15 @@
     color: #ffffff;
     font-size: 80px !important;
   }
+}
+
+.navigation-box {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding: 1% 10% 0 10%;
+  height: 100px;
 }
 
 @media (min-width: 1100px) {

@@ -21,6 +21,7 @@ import thumb from '../../../assets/thumb.jpeg'
 import thumb2 from '../../../assets/thumb2.jpeg'
 import thumb3 from '../../../assets/thumb3.jpeg'
 import thumb4 from '../../../assets/thumb5.jpeg'
+import Pagination from '@mui/material/Pagination';
 
 
 const reels = [
@@ -46,6 +47,15 @@ type Video = {
   time: string;
 }
 
+interface NavigationData {
+  next_page: string | null;
+  page: number;
+  per_page: number;
+  previous_page: string | null;
+  total_pages: number;
+  total_records: number;
+}
+
 const downloadVideo = (url: string, filename: string) => {
   const a = document.createElement('a');
   a.href = url;
@@ -55,7 +65,7 @@ const downloadVideo = (url: string, filename: string) => {
   document.body.removeChild(a);
 }
 
-const baseUrl = 'https://olhaissomeu.com.br/api/videobyspot?spot_id=13'
+const baseUrl = 'https://olhaissomeu.com.br/api/videobyspot?spot_id=13&page=1&per_page=12'
 
 const Galery = () => {
   const token = '$10$gqUEvTBQY9zSFzjqjMSzi.Y6mmz2i94/vF/mFP3uZuUqYHR9Cia5i'
@@ -63,6 +73,20 @@ const Galery = () => {
   const [selectedStartDate, setSelectedStartDate] = useState(null as any)
   const [selectedStartTime, setSelectedStartTime] = useState(null as any)
   const [selectedEndTime, setSelectedEndTime] = useState(null as any)
+  const [navigation, setNavigation] = useState<NavigationData>({
+    next_page: '',
+    page: 0,
+    per_page: 0,
+    previous_page: '',
+    total_pages: 0,
+    total_records: 0,
+  })
+
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    fetchPagination(value)
+  };
   const handleStartDateChange = (newValue: any) => {
     setSelectedStartDate(newValue)
   }
@@ -98,7 +122,20 @@ const Galery = () => {
             time: time,
           }
         })
+
         setVideos(videosWithUrl)
+        console.log(response.data);
+
+        const { next_page, page, per_page, previous_page, total_pages, total_records } = response.data;
+        setNavigation({
+          next_page,
+          page,
+          per_page,
+          previous_page,
+          total_pages,
+          total_records,
+        });
+
       } catch (error) {
         console.error(error)
       }
@@ -111,19 +148,59 @@ const Galery = () => {
       const date = new Date(dateString)
       const year = date.getFullYear()
       const month = (date.getMonth() + 1).toString().padStart(2, '0')
-      const day = date.getDate().toString().padStart(2, '0') // Corrigido aqui
+      const day = date.getDate().toString().padStart(2, '0')
       const time = new Date(isoTimeString)
-      const hours = time.getHours().toString().padStart(2, '0') // Mudança potencial aqui para getHours() se você quiser a hora local
-      const minutes = time.getMinutes().toString().padStart(2, '0') // Mudança potencial aqui para getMinutes() se você quiser os minutos locais
+      const hours = time.getHours().toString().padStart(2, '0')
+      const minutes = time.getMinutes().toString().padStart(2, '0')
       const seconds = '00'
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
     }
     const correctedStartDate = encodeURIComponent(convertDateAndTimeToYYYYMMDDHHMMSS(start_date, start_time))
     const correctedEndDate = encodeURIComponent(convertDateAndTimeToYYYYMMDDHHMMSS(start_date, end_time))
 
-    console.log(correctedStartDate, correctedEndDate);
     const baseUrl = 'https://olhaissomeu.com.br/api/videobyspot'
     const url = `${baseUrl}?spot_id=${spot_id}&page=${page}&per_page=${per_page}&start_date=${correctedStartDate}&end_date=${correctedEndDate}`
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        }
+      })
+      const responseData = await response.json()
+      const videosWithUrl = responseData.data.map((video: Video) => {
+        const date = new Date(video.created_at)
+        const formattedDate = date.toLocaleString('pt-BR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })
+        const time = date.toLocaleTimeString('pt-BR', {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+        return {
+          ...video,
+          url: `https://olhaissomeu.com.br/stream/${video.filename.split('.')[0]}`,
+          created_at: formattedDate,
+          time: time,
+        }
+      })
+      setVideos(videosWithUrl)
+    } catch (error) {
+      console.error('Failed to fetch data:', error)
+      throw error
+    }
+  }
+
+  async function fetchPagination(value: any): Promise<any> {
+    console.log(value);
+
+
+    const baseUrl = 'https://olhaissomeu.com.br'
+    const url = `${baseUrl}/api/videobyspot?spot_id=13&page=${value}&per_page=12`
 
     try {
       const response = await fetch(url, {
@@ -207,7 +284,7 @@ const Galery = () => {
                 fontWeight: 'normal',
               }}>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
               <br />
-              <button onClick={() => { scrollToTarget()}} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
+              <button onClick={() => { scrollToTarget() }} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
                 <PlayCircleOutlineIcon sx={{ color: 'white', marginRight: '20px' }} />
                 <Typography variant="h6" fontWeight={'bold'} color={'white'}>Assistir meus videos</Typography>
               </button>
@@ -334,8 +411,8 @@ const Galery = () => {
                       <p>Arena BT</p>
                     </div>
                     {<div>
-                      <IconButton aria-label="share" size='small'>
-                        <ShareIcon color='primary' onClick={() => { shareInfo(video.filename.split('.')[0]) }} />
+                      <IconButton aria-label="share" size='small' onClick={() => { shareInfo(video.filename.split('.')[0]) }}>
+                        <ShareIcon color='primary' />
                       </IconButton>
                       <IconButton aria-label="download" onClick={() => downloadVideo(video.url, video.filename)} size='small'>
                         <FileDownloadIcon color='primary' />
@@ -346,6 +423,9 @@ const Galery = () => {
               </Item>
             </Grid>
           ))}
+        </Grid>
+        <Grid container className='navigation-box'>
+          <Pagination count={navigation.total_pages} page={page} variant="outlined" color="primary" onChange={handleChange} />
         </Grid>
       </div>
     </div>
