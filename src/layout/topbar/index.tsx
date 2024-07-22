@@ -7,6 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import InfoIcon from '@mui/icons-material/Info';
+import CelebrationIcon from '@mui/icons-material/Celebration'
+import FmdGoodIcon from '@mui/icons-material/FmdGood';;
 
 const openLink = () => {
   window.open('https://www.instagram.com/olhaissomeu.brasil?igsh=MXd0cHhzeDZoMTAwMg==', '_blank')
@@ -68,9 +71,10 @@ const TopBar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Onde Estamos</MenuItem>
-              <MenuItem onClick={handleClose}>Eventos</MenuItem>
-              <MenuItem onClick={handleClose}>Sobre</MenuItem>
+              <MenuItem onClick={handleClose}><FmdGoodIcon/> Onde Estamos</MenuItem>
+              <MenuItem onClick={handleClose}><CelebrationIcon/> Eventos</MenuItem>
+              <MenuItem onClick={handleClose}><InfoIcon/> Sobre</MenuItem>
+              <MenuItem onClick={handleClose}><InstagramIcon/>Instagram</MenuItem>
             </Menu>
           </div>
         </div>
