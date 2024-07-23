@@ -98,9 +98,25 @@
 }
 
 .header-text {
-  height: 900px;
+  height: 1000px;
   width: 100vw;
   padding: 0 10%;
+}
+
+.typografia {
+  padding-top: 8vh;
+  color: #ffffff;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+  font-weight: bold !important;
+  text-align: left;
+  font-size: 4vw !important;
+}
+
+.phrase {
+  width: 350px;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+  font-size: 1.3rem;
+  font-weight: normal !important;
 }
 
 .box-reel {
@@ -196,11 +212,46 @@
   padding: 20px 0 0 0;
 }
 
+.navigation-box {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.filter-text-title {
+  font-size: 3.5vw;
+  font-weight: bold;
+}
+.filter-text-subtitle {
+  font-size: 1.5vw;
+}
+.filter-text-hashtag {
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
+
+
+@media (max-width: 768px) {
+  .filter-text-title {
+    font-size: 3.8vw;
+    font-weight: bold;
+  }
+  .filter-text-subtitle {
+    font-size: 3.5vw;
+  }
+  .filter-text-hashtag {
+    font-size: 3.5vw;
+    font-weight: bold;
+  }
+}
+
 @media (max-width: 1100px) {
   .desktopMenu {
     display: none;
   }
-
   .reel {
     width: 180px;
     border-radius: 20px;
@@ -225,13 +276,7 @@
   }
 }
 
-.navigation-box {
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-}
+
 
 @media (min-width: 1100px) {
   .hamburguer {
@@ -260,11 +305,54 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .reel {
+    width: 250px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .reel {
+    width: 250px;
+    border-radius: 20px;
+  }
+
+  .background {
+    height: 1000px; /* Ajuste conforme necessário */
+    clip-path: ellipse(100% 60% at 50% 40%); /* Ajuste conforme necessário */
+  }
+
+  .header-text {
+    height: 800px; /* Ajuste conforme necessário */
+    width: 100vw;
+    padding: 0 15%; /* Ajuste conforme necessário */
+  }
+
+  .typografia {
+    padding-top: 8vh;
+    color: #ffffff;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+    font-weight: bold !important;
+    text-align: left;
+    font-size: 3vw !important;
+  }
+}
+
+
 @media (min-width: 3000px) {
   .header-text {
     height: 900px; /* Ajuste conforme necessário */
     width: 100vw;
     padding: 0 15%; /* Ajuste conforme necessário */
+  }
+  .typografia {
+    padding-top: 8vh;
+    color: #ffffff;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+    font-weight: bold !important;
+    text-align: left;
+    font-size: 3vw !important;
   }
 
   .background {

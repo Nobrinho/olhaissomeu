@@ -273,16 +273,11 @@ const Galery = () => {
       <div className="slider">
         <div>
           <div className='header-text'>
-            <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold', textAlign: 'left', paddingTop: '15vh' }}>
+            <Typography className='typografia'>
               Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
               <br />
               <br />
-              <p style={{
-                width: '350px',
-                textShadow: '0px 0px 10px rgba(0, 0, 0, 0.9)',
-                fontSize: '1.2rem',
-                fontWeight: 'normal',
-              }}>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
+              <p className='phrase'>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
               <br />
               <button onClick={() => { scrollToTarget() }} style={{ display: 'flex', alignItems: 'center', width: '293px' }} className='button'>
                 <PlayCircleOutlineIcon sx={{ color: 'white', marginRight: '20px' }} />
@@ -307,9 +302,9 @@ const Galery = () => {
       <div className="searchBar" id="galleryTarget">
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Item>
-              <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Acesse seus vídeos com filtros personalizados</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: '0.99rem' }}>Registre e compartilhe momentos inesquecíves com os seus amigos e redes sociais. Não esqueça das <span style={{ fontWeight: '1000' }}> HASHTAGS!</span></Typography>
+            <Item className='filter-text'>
+              <p className='filter-text-title'>Acesse seus vídeos com filtros personalizados</p>
+              <p className='filter-text-subtitle'>Registre e compartilhe momentos inesquecíves com os seus amigos e redes sociais. Não esqueça das <span className='filter-text-hashtag'>HASHTAGS!</span></p>
             </Item>
           </Grid>
           <Grid item xs={12}>
