@@ -425,7 +425,12 @@ const Galery = () => {
           ))}
         </Grid>
         <Grid container className='navigation-box'>
-          <Pagination count={navigation.total_pages} page={page} variant="outlined" color="primary" onChange={handleChange} />
+          <Grid item xs={12} sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
+            <Pagination variant='outlined' count={navigation.total_pages} page={page} onChange={handleChange} />
+          </Grid>
         </Grid>
       </div>
     </div>
