@@ -22,6 +22,7 @@ import thumb2 from '../../../assets/thumb2.jpeg'
 import thumb3 from '../../../assets/thumb3.jpeg'
 import thumb4 from '../../../assets/thumb5.jpeg'
 import Pagination from '@mui/material/Pagination';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 
 
 const reels = [
@@ -274,7 +275,7 @@ const Galery = () => {
         <div>
           <div className='header-text'>
             <Typography className='typografia'>
-              Compartilhe os seus melhores momentos <br /> com a Arena BT Sports
+              Compartilhe os seus melhores momentos com a Arena BT Sports
               <br />
               <br />
               <p className='phrase'>Registre e compartilhe momentos inesqueciveis com as pessoas e redes sociais!</p>
@@ -357,7 +358,7 @@ const Galery = () => {
           </Grid>
         </Grid>
       </div>
-      <div className="gallery" >
+      <div className="gallery">
         <Grid container spacing={2}>
           {videos.map((video: Video) => (
             <Grid item xs={12} sm={6} lg={3} key={video.id}>
@@ -428,6 +429,20 @@ const Galery = () => {
           </Grid>
         </Grid>
       </div>
+      {videos.length === 0 && (
+        <div className="no-content" >
+          <Typography variant='h4' color='primary'>Nenhum vídeo encontrado na data e horário selecionados</Typography>
+          <div className='clearSearch' onClick={() => {
+          fetchPagination(1)
+          setSelectedStartDate(null)
+          setSelectedStartTime(null)
+          setSelectedEndTime(null)
+        }} >
+          <SearchOffIcon sx={{ fontSize: '100px', color: 'primary' }} />
+          <p >Limpar busca</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
